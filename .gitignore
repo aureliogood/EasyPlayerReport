@@ -1,0 +1,56 @@
+# -----------------------------------------------------------------------------
+# Cosas que NUNCA deben subirse a un repositorio
+# -----------------------------------------------------------------------------
+
+# El mapa de ProGuard traduce los nombres ofuscados a los originales. Es la
+# pieza que deshace el ofuscado entero, asi que fuera del repo.
+target/proguard_map.txt
+target/proguard_seed.txt
+
+# Maven incluido en la carpeta y su zip. Son 10 MB de binarios de terceros.
+apache-maven-3.9.9/
+maven.zip
+
+# Carpetas de entrega. El JAR se sube a GitHub Releases, no al arbol de fuentes.
+dist/
+EasyPlayerReport.zip
+EasyPlayerReport.jar
+
+# Salidas de compilacion.
+target/
+build/
+out/
+
+# -----------------------------------------------------------------------------
+# Entornos de desarrollo
+# -----------------------------------------------------------------------------
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.classpath
+.project
+nbproject/
+nb-configuration.xml
+
+# -----------------------------------------------------------------------------
+# Sistema operativo
+# -----------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+
+# -----------------------------------------------------------------------------
+# Datos de un servidor de pruebas, por si se copia el plugin dentro de uno
+# -----------------------------------------------------------------------------
+plugins/
+logs/
+world*/
+*.log
+*.db
+*.sqlite
+*.sqlite3
+config.yml.bak

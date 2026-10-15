@@ -1,0 +1,73 @@
+name: EasyPlayerReport
+version: '1.0.0'
+main: com.easyplayerreport.EasyPlayerReport
+api-version: '1.21'
+author: ocampo05
+libraries:
+  - org.xerial:sqlite-jdbc:3.46.1.0
+  - com.mysql:mysql-connector-j:9.3.0
+commands:
+  reportar:
+    description: Abre el menú para crear un reporte
+    usage: /reportar
+  reportes:
+    description: Ver tus reportes relacionados
+    usage: /reportes
+  reportesadmin:
+    description: Gestión de reportes (staff)
+    usage: /reportesadmin
+  reportechat:
+    description: Abre el chat privado de un reporte
+    usage: /reportechat <id>
+  reporteshistorial:
+    aliases: [historial]
+    description: Abre el historial de reportes de un jugador
+    usage: /reporteshistorial <jugador>
+  reportesestadisticas:
+    description: Abre estadísticas de reportes
+    usage: /reportesestadisticas
+  apelacion:
+    description: Apela un reporte propio en el que eres el reportado
+    usage: /apelacion <id>
+  reportestoggle:
+    description: Activa o desactiva las notificaciones de reportes
+    usage: /reportestoggle
+  easyplayerreport:
+    description: Gestiona la configuración, estadísticas y exportaciones
+    usage: /easyplayerreport reload|stats|export <json|csv>
+permissions:
+  easyplayerreport.use:
+    description: Permite crear reportes
+    default: true
+  easyplayerreport.staff:
+    description: Permite gestionar reportes
+    default: op
+  easyplayerreport.moderate:
+    description: Permite expulsar, banear o advertir desde un reporte
+    default: op
+  easyplayerreport.falsereport:
+    description: Permite marcar un reporte como falso y bloquear al reportador
+    default: op
+  easyplayerreport.admin:
+    description: Permite eliminar reportes y acceder a las funciones administrativas
+    default: op
+    children:
+      easyplayerreport.history: true
+      easyplayerreport.stats: true
+      easyplayerreport.export: true
+      easyplayerreport.reopen: true
+  easyplayerreport.history:
+    description: Permite consultar el historial de reportes de un jugador
+    default: op
+  easyplayerreport.stats:
+    description: Permite consultar estadísticas de reportes
+    default: op
+  easyplayerreport.export:
+    description: Permite exportar todos los reportes
+    default: op
+  easyplayerreport.reopen:
+    description: Permite reabrir reportes cerrados
+    default: op
+  easyplayerreport.appeal:
+    description: Permite apelar reportes propios en los que eres el reportado
+    default: true

@@ -1,0 +1,93 @@
+# ============================================================
+#  lang_en.yml - Messages in English
+#  Texts support & for colors.
+#  To use this language set: lang: en in config.yml
+# ============================================================
+
+messages:
+  no-permission: "&cYou don't have permission to do this."
+  player-only: "&7Players only."
+  reportchat-usage: "&eUsage: /reportechat <id>"
+  admin-reloaded: "&aConfiguration reloaded. Auto-close: %time%."
+  admin-reloaded-never: "&aConfiguration reloaded. Auto-close: disabled."
+  discord-reloaded: "&aDiscord reports enabled in channel %channel%."
+  discord-test-sent: "&7Test message sent. Check Discord."
+  discord-incomplete: "&eDiscord enabled but incomplete: check token and channel-id in discord/discord.yml."
+  discord-off: "&7Discord reports disabled."
+  update-separator: "&6&m--------------------------------------------"
+  update-header: "<red><bold>EasyPlayerReport</bold> <white>Update Available:"
+  update-version: "<white>A new version is available: <green>%version%"
+  update-download-link: "<white><underline>Click here to download the update.</underline>"
+  staff-notifications-enabled: "&aReport notifications enabled."
+  staff-notifications-disabled: "&eReport notifications disabled."
+  reason-unavailable: "&cYou don't have any report reasons available."
+  history-usage: "&eUsage: /%command% <player>"
+  export-usage: "&eUsage: /easyplayerreport export <json|csv>"
+  export-success: "&aExport created at &f%file%&a."
+  export-failed: "&cThe export could not be created."
+  admin-usage: "&eUsage: /easyplayerreport reload|stats|export <json|csv>"
+  report-created: "&aReport sent. Our staff will review it soon."
+  target-reported: "&c%reporter% has reported you. Use &f/reportes&c to view your reports."
+  report-cancelled: "&7Report cancelled."
+  cooldown: "&cWait %time%s before reporting again."
+  too-many: "&cYou already have too many active reports."
+  invalid-player: "&cThat player doesn't exist or isn't online."
+  self-report: "&cYou can't report yourself."
+  report-not-found: "&cThat report was not found."
+  report-taken: "&aYou took report #%id%."
+  report-released: "&eYou released report #%id%."
+  report-reassigned: "&bYou reassigned report #%id% to yourself."
+  report-already-assigned: "&7This report is already assigned to you."
+  report-note-saved: "&aSaved the private note for report #%id%."
+  report-closed: "&aYou closed report #%id%."
+  report-reopened: "&aYou reopened report #%id%."
+  reopen-cooldown: "&cWait %time%s before reopening this report."
+  appeal-usage: "&eUsage: /appeal <id>"
+  appeal-not-found: "&cNo valid appeal was found for that report."
+  appeal-cooldown: "&cWait %time% before appealing again."
+  appeal-created: "&aYour appeal #%id% was sent to staff."
+  appeal-already: "&eThis report already has an appeal."
+  appeal-empty: "&cWrite a description before sending."
+  appeal-failed: "&cThe appeal could not be sent."
+  staff-reopened: "&eYour report #%id% was reopened by %staff%."
+  report-deleted: "&cYou deleted report #%id%."
+  staff-taken: "&eYour report #%id% was taken by %staff%."
+  staff-closed: "&aYour report #%id% was closed by the staff."
+  auto-closed: "&7Your report #%id% was automatically closed after the time limit."
+  teleported-to: "&aYou arrived at the report location."
+  teleport-none: "&cNo saved location for that report."
+  target-offline: "&c%target% is not online right now."
+  target-kicked: "&cYou were kicked from the server because of a report."
+  target-banned: "&cYou were banned from the server because of a report."
+  target-warned: "&eYou received a warning for: %reason%."
+  staff-kicked: "&aYou kicked %target%."
+  staff-banned: "&aYou banned %target%."
+  staff-warned: "&aWarning sent to %target%."
+  moderate-only: "&cOnly moderation staff can do that."
+  report-false-marked: "&aYou marked report #%id% as false. %reporter% cannot report for %time%."
+  false-report-notify: "&cYou made a false report, wait %time% to report again."
+  false-report-blocked: "&cYou made a false report, wait %time% to report again."
+  staff-taken-other: "&eThis report is being handled by %staff%."
+  staff-already-closed: "&cThis report is already closed."
+  chat-sent: "&aMessage sent to the report chat."
+  chat-no-staff: "&cChat is enabled after a staff member takes the report."
+  staff-pending: "&7(Pending: &e%count%&7)"
+  chat-discord-1: "&7[REPORT] &b#%id% &8» &fDiscord: &71 new message."
+  chat-discord-n: "&7[REPORT] &b#%id% &8» &fDiscord: &7%count% new messages."
+  expiration-line: "This report will close automatically in: "
+
+# Status name in each language. The plugin uses these keys everywhere, so
+# update them here if you translate the rest of the texts.
+statuses:
+  open: "&6Open"
+  taken: "&bIn progress"
+  closed: "&aClosed"
+
+# Units for durations in words ("5 minutes", "1 hour").
+time:
+  second: second
+  second-plural: seconds
+  minute: minute
+  minute-plural: minutes
+  hour: hour
+  hour-plural: hours

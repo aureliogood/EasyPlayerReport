@@ -1,0 +1,93 @@
+# ============================================================
+#  lang_es.yml - Mensajes en español
+#  Los textos soportan & para colores.
+#  Para usar este idioma: lang: es en config.yml
+# ============================================================
+
+messages:
+  no-permission: "&cNo tienes permiso para esto."
+  player-only: "&7Solo jugadores."
+  reportchat-usage: "&eUso: /reportechat <id>"
+  admin-reloaded: "&aConfiguración recargada. Auto-cierre: %time%."
+  admin-reloaded-never: "&aConfiguración recargada. Auto-cierre: desactivado."
+  discord-reloaded: "&aAvisos a Discord activos en el canal %channel%."
+  discord-test-sent: "&7Mensaje de prueba enviado. Revisa Discord."
+  discord-incomplete: "&eDiscord activado pero incompleto: revisa token y channel-id en discord/discord.yml."
+  discord-off: "&7Avisos a Discord desactivados."
+  update-separator: "&6&m--------------------------------------------"
+  update-header: "<red><bold>EasyPlayerReport</bold> <white>Update Available:"
+  update-version: "<white>A new version is available: <green>%version%"
+  update-download-link: "<white><underline>Click here to download the update.</underline>"
+  staff-notifications-enabled: "&aNotificaciones de reportes activadas."
+  staff-notifications-disabled: "&eNotificaciones de reportes desactivadas."
+  reason-unavailable: "&cNo tienes motivos de reporte disponibles."
+  history-usage: "&eUso: /%command% <jugador>"
+  export-usage: "&eUso: /easyplayerreport export <json|csv>"
+  export-success: "&aExportación creada en &f%file%&a."
+  export-failed: "&cNo se pudo crear la exportación."
+  admin-usage: "&eUso: /easyplayerreport reload|stats|export <json|csv>"
+  report-created: "&aReporte enviado. Nuestro staff lo revisará pronto."
+  target-reported: "&cEl jugador %reporter% te ha reportado. Usa &f/reportes&c para ver tus reportes."
+  report-cancelled: "&7Reporte cancelado."
+  cooldown: "&cEspera %time%s antes de reportar de nuevo."
+  too-many: "&cYa tienes demasiados reportes activos."
+  invalid-player: "&cEse jugador no existe o no está en línea."
+  self-report: "&cNo puedes reportarte a ti mismo."
+  report-not-found: "&cNo se encontró ese reporte."
+  report-taken: "&aTomaste el reporte #%id%."
+  report-released: "&eLiberaste el reporte #%id%."
+  report-reassigned: "&bReasignaste el reporte #%id% a tu nombre."
+  report-already-assigned: "&7Ya tienes este reporte asignado."
+  report-note-saved: "&aGuardaste la nota privada del reporte #%id%."
+  report-closed: "&aCerraste el reporte #%id%."
+  report-reopened: "&aReabriste el reporte #%id%."
+  reopen-cooldown: "&cDebes esperar %time%s antes de reabrir este reporte."
+  appeal-usage: "&eUso: /apelacion <id>"
+  appeal-not-found: "&cNo se encontró una apelación válida para ese reporte."
+  appeal-cooldown: "&cEspera %time% antes de apelar de nuevo."
+  appeal-created: "&aTu apelación #%id% fue enviada al staff."
+  appeal-already: "&eEste reporte ya tiene una apelación."
+  appeal-empty: "&cEscribe una descripción antes de enviar."
+  appeal-failed: "&cNo se pudo enviar la apelación."
+  staff-reopened: "&eTu reporte #%id% fue reabierto por %staff%."
+  report-deleted: "&cEliminaste el reporte #%id%."
+  staff-taken: "&eTu reporte #%id% fue tomado por %staff%."
+  staff-closed: "&aTu reporte #%id% fue cerrado por el staff."
+  auto-closed: "&7Tu reporte #%id% se cerró automáticamente por tiempo."
+  teleported-to: "&aLlegaste al punto del reporte."
+  teleport-none: "&cNo hay posición guardada para ese reporte."
+  target-offline: "&c%target% no está conectado ahora mismo."
+  target-kicked: "&cFuiste expulsado del servidor por un reporte."
+  target-banned: "&cFuiste baneado del servidor por un reporte."
+  target-warned: "&eRecibiste una advertencia por: %reason%."
+  staff-kicked: "&aExpulsaste a %target%."
+  staff-banned: "&aBaneaste a %target%."
+  staff-warned: "&aAdvertencia enviada a %target%."
+  moderate-only: "&cSolo el personal de moderación puede hacer eso."
+  report-false-marked: "&aMarcaste el reporte #%id% como falso. %reporter% no podrá reportar durante %time%."
+  false-report-notify: "&cHiciste un reporte falso, espera %time% para volver a reportar."
+  false-report-blocked: "&cHiciste un reporte falso, espera %time% para volver a reportar."
+  staff-taken-other: "&eEste reporte lo está atendiendo %staff%."
+  staff-already-closed: "&cEste reporte ya está cerrado."
+  chat-sent: "&aMensaje enviado al chat del reporte."
+  chat-no-staff: "&cEl chat se habilita cuando un miembro del staff toma el reporte."
+  staff-pending: "&7(Pendientes: &e%count%&7)"
+  chat-discord-1: "&7[REPORTE] &b#%id% &8» &fDiscord: &71 mensaje nuevo."
+  chat-discord-n: "&7[REPORTE] &b#%id% &8» &fDiscord: &7%count% mensajes nuevos."
+  expiration-line: "El reporte se cerrará automáticamente en: "
+
+# Nombre del estado en cada idioma. El plugin usa estas claves en todos los
+# dialogos, asi que cambialas aqui si traduces el resto de textos.
+statuses:
+  open: "&6Abierto"
+  taken: "&bEn proceso"
+  closed: "&aCerrado"
+
+# Unidades para los tiempos en palabras ("5 minutos", "1 hora").
+time:
+  second: segundo
+  second-plural: segundos
+  minute: minuto
+  minute-plural: minutos
+  hour: hora
+  hour-plural: horas

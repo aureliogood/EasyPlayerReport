@@ -1,0 +1,82 @@
+# =============================================================
+# AVISO DE ACTUALIZACIONES
+# -------------------------------------------------------------
+# Cuando un jugador entra y hay una version mas nueva del plugin
+# subida en SpigotMC, se le escribe en el chat con un enlace para
+# descargarla. Todo esto se puede apagar del todo poniendo
+# check-update: false en config.yml, y entonces no se hace ni una sola
+# peticion de red.
+#
+# El texto del aviso sale de lang/lang_es.yml y lang/lang_en.yml
+# (claves messages.update-*), asi que se puede cambiar el color, las
+# palabras o el idioma sin tocar este archivo.
+# =============================================================
+
+# Interruptor propio. Por si quieres apagar solo esto sin tocar
+# config.yml (por ejemplo, en un servidor de pruebas).
+enabled: true
+
+# -------------------------------------------------------------
+# 1. QUE ES TU RECURSO
+# -------------------------------------------------------------
+# El numero que sale al final de la URL de tu pagina en SpigotMC.
+# https://www.spigotmc.org/resources/tu-plugin.12345/
+#                                                  ^^^^^ este numero
+#
+# Con 0 no se puede comprobar nada y se avisa por consola al arrancar.
+resource-id: 0
+
+# El GUID del servidor. Sale del console.txt de Paper, en una linea
+# parecida a "server-id: 6f9a...". Se genera solo la primera vez que
+# arranca el servidor y no cambia nunca.
+#
+# Si no lo pones, deja el de ejemplo y el aviso no se mostrara hasta
+# que lo rellenes.
+server-id: '00000000000000000000000000000000'
+
+# -------------------------------------------------------------
+# 2. DONDE PREGUNTAR Y DONDE IR
+# -------------------------------------------------------------
+# Si lo dejas vacio (lo normal) se usa la API publica de SpigotMC.
+#
+# Si lo rellenas, se pregunta ahi en lugar de a SpigotMC. Solo sirve
+# si tienes tu propia API; tiene que devolver un JSON con un campo
+# "version", por ejemplo:
+#
+#   {"version": "1.2.0"}
+#
+# Se usa si cambias de hosting, vendes el plugin, o prefieres no
+# depender de SpigotMC.
+url: ''
+
+# Enlace al que lleva el "descargar la actualizacion". Si lo dejas
+# vacio se construye con el resource-id de arriba. Ponlo aqui si
+# quieres llevar a tu Discord o a otra pagina de descarga.
+download-url: ''
+
+# -------------------------------------------------------------
+# 3. CADA CUANDO SE PREGUNTA
+# -------------------------------------------------------------
+# Segundos entre comprobaciones. 21600 son 6 horas.
+#
+# No es lo que se le pregunta a SpigotMC al entrar un jugador: eso
+# no pregunta nada, usa lo que se guardo en la ultima comprobacion.
+# Por eso subirlo a 21600 no molesta a nadie.
+check-interval-seconds: 21600
+
+# -------------------------------------------------------------
+# 4. A QUIEN SE LE AVISA
+# -------------------------------------------------------------
+# Permiso que hay que tener para ver el aviso. Por defecto, el mismo
+# que usa el staff. Ponle uno nuevo si quieres que lo vea otra
+# gente, como un grupo de beta testers.
+notify-permission: 'easyplayerreport.staff'
+
+# Escribir la version nueva en la consola del servidor, para que te
+# enteres aunque entres al juego con la version vieja.
+console: true
+
+# Escribir en consola cuando la comprobacion falla (sin red, con un
+# 403...). Leave en false si no quieres ver lineas cada 6 horas por
+# un fallo de red normal.
+log-errors: false

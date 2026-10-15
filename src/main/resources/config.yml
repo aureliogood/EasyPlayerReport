@@ -1,0 +1,197 @@
+# =====================================================
+#  EasyPlayerReport - Configuracion
+# =====================================================
+
+# -------------------------------------------------------------
+# AVISO DE ACTUALIZACIONES
+# -------------------------------------------------------------
+# Cuando un jugador entra y hay una version mas nueva subida en SpigotMC,
+# se le avisa en el chat con un enlace para descargarla. Solo ven el aviso
+# los que tengan el permiso que indiques en update.yml (por defecto el
+# mismo del staff).
+#
+# Ponlo en false para que no se pregunte nada a SpigotMC: el plugin no
+# hara ni una sola peticion de red por esto.
+check-update: true
+
+# Persistencia: sqlite (por defecto) o mysql.
+# Al activar una base de datos, reports.yml se conserva como migración/fallback.
+database:
+  type: sqlite
+  sqlite:
+    file: reports.db
+  mysql:
+    host: localhost
+    port: 3306
+    database: odisseyreports
+    user: root
+    password: ""
+
+# Segundos que debe esperar un jugador entre reporte y reporte.
+cooldown-seconds: 60
+
+# Máximo de reportes activos que puede tener un mismo jugador a la vez.
+max-active-per-player: 3
+
+# Líneas del historial que se muestran en la ventana del chat del reporte.
+chat-max-lines: 10
+
+# Segundos de "ventana abierta" del chat: si la otra persona abrió la ventana
+# hace ese tiempo o menos, se le actualiza sola al llegar un mensaje.
+chat-refresh-seconds: 20
+
+# Máximo de mensajes que se guardan por reporte en el historial persistente.
+chat-max-messages: 100
+
+# Días que se conservan los reportes cerrados en reports.yml (0 = sin límite).
+# Los reportes activos nunca se eliminan por retención.
+retention:
+  closed-reports-days: 30
+  backups-days: 30
+
+# Cada cambio de estado (tomar, cerrar, nota, chat...) solo marca los
+# datos como pendientes; la escritura real se agrupa y se hace como máximo cada
+# N segundos. Antes cada clic reescribía la tabla completa de reportes.
+# N segundos para escribir menos seguido (más riesgo de perder los últimos
+# cambios si el servidor se cae), bajalo para perder menos datos.
+# 0 = escribir en cada cambio (comportamiento anterior, más lento).
+save-interval-seconds: 3
+
+
+
+# Idioma de los mensajes del plugin: "es" (español) o "en" (inglés).
+# Los mensajes se editan en la carpeta lang/ (archivos lang_<idioma>.yml).
+lang: es
+
+# Segundos hasta que un reporte abierto se cierra solo (0 = nunca).
+# Ejemplo: 43200 = 12 horas, 3600 = 1 hora, 300 = 5 minutos.
+# Al recargar la config, el plazo se reinicia para los reportes activos.
+# El tiempo restante se muestra en el detalle del reporte y en el botón de
+# aviso ("❗") del chat del reporte.
+auto-close-seconds: 43200
+
+# Minutos de ventana para detectar reportes duplicados: si un jugador ya tiene
+# un reporte abierto contra el mismo jugador creado dentro de estos minutos,
+# el formulario le avisa antes de enviar (0 = desactivar).
+duplicate-window-minutes: 5
+
+# Si el número de reportes activos supera este valor, el ping al staff suena
+# más agudo (0 = siempre normal).
+staff-alert-threshold: 5
+
+# Motivos disponibles en el formulario de /reportar.
+# Se muestra un botón por cada motivo. Si un motivo no empieza por un símbolo
+# (los emojis), el plugin le antepone el icono que corresponda según
+# reason-icons, más abajo.
+reasons:
+  - "Hacks / Cheats"
+  - "Chat / Spam / Toxicidad"
+  - "Griefing / Robo"
+  - "Bug / Duplicacion"
+
+# Icono que se antepone a un motivo que no traiga ya uno. Se busca la palabra
+# clave dentro del texto del motivo, sin distinguir mayúsculas. Para quitar el
+# icono de una palabra, dale el valor "".
+reason-icons:
+  hack: "⚔"
+  cheat: "⚔"
+  trampa: "⚔"
+  chat: "💬"
+  spam: "💬"
+  toxic: "💬"
+  acoso: "💬"
+  grief: "🏰"
+  robo: "🏰"
+  ladron: "🏰"
+  bug: "🐛"
+  duplica: "🐛"
+  crash: "🐛"
+
+# Efecto que se le aplica a quien es reportado (0 = ninguno).
+effects:
+  # Duración de la ceguera en ticks (20 ticks = 1 segundo). 60 = 3 segundos.
+  reported-blindness-ticks: 60
+  # 0 = ceguera normal, 1 = nivel II, etc.
+  reported-blindness-amplifier: 0
+
+sounds:
+  enabled: true
+  # Sonido que se le reproduce a quien es reportado.
+  reported-volume: 1.0
+  reported-pitch: 1.5
+  # Sonido que se le reproduce al staff cuando entra un reporte.
+  alert-volume: 1.0
+  alert-pitch: 1.0
+  # Tono más agudo cuando los pendientes superan staff-alert-threshold.
+  alert-pitch-busy: 2.0
+
+# Límites de los formularios y de la paginación. La Dialog API no admite 0,
+# así que cualquier valor por debajo de 1 se trata como 1.
+limits:
+  # Caracteres del nombre del jugador a reportar.
+  target-name-max-length: 16
+  # Caracteres de la descripción del reporte.
+  description-max-length: 120
+  # Caracteres de la apelación.
+  appeal-max-length: 500
+  # Caracteres de la nota privada del staff.
+  note-max-length: 500
+  # Caracteres de cada mensaje del chat del reporte.
+  chat-message-max-length: 120
+  # Reportes por página en /reportesadmin, /reportes y /reporteshistorial.
+  reports-per-page: 6
+  # Ancho de los campos de texto de los formularios, en píxeles.
+  input-width: 310
+
+reopen-cooldown-seconds: 0
+
+# Segundos que un jugador espera entre una apelación y otra, sin importar el
+# reporte (una apelación por reporte). 0 = sin límite.
+# El reportado puede apelar tanto con el reporte abierto como cerrado.
+appeal-cooldown-seconds: 300
+
+
+# Sanciones aplicadas desde el detalle de un reporte.
+moderation:
+  # Duración del ban. Acepta "30d", "12h", "45m", "1d12h30m", un número
+  # suelto (segundos) o "permanent" (0 y vacío también = permanente).
+  ban-duration: "7d"
+  # Banea también la IP del jugador conectado al aplicar el ban.
+  ban-ip: false
+
+# Segundos que un jugador queda sin poder reportar después de que el staff
+# marque uno de sus reportes como falso. Es la defensa contra el spam: el
+# cooldown normal solo obliga a esperar 60 s entre reporte y reporte, así que un
+# jugador molesto podría abrir los 3 reportes activos uno detrás de otro.
+# El reporte se cierra automáticamente al marcarlo como falso.
+# 0 = solo avisa, sin bloqueo.
+false-report-block-seconds: 3600
+
+permission-config:
+  enabled: false
+  reason:
+    "Hacks / Cheats":
+      use: true
+      permissions: []
+    "Chat / Spam / Toxicidad":
+      use: true
+      permissions: []
+    "Griefing / Robo":
+      use: true
+      permissions: []
+    "Bug / Duplicacion":
+      use: true
+      permissions: []
+  auto-close-seconds:
+    - permissions:
+        - easyplayerreport.limit.auto-close.never
+      value: 0
+  limits:
+    - permissions:
+        - easyplayerreport.limit.reports
+      max-active-per-player: 5
+      cooldown-seconds: 10
+  sounds:
+    - permissions:
+        - easyplayerreport.sound.alert
+      enabled: true

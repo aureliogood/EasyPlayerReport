@@ -1,0 +1,222 @@
+# =============================================================
+# AVISOS DE REPORTES EN DISCORD
+# -------------------------------------------------------------
+# Manda cada reporte a un canal de Discord con un embed, para
+# que el staff lo vea sin entrar al juego.
+#
+# No se usa ninguna libreria externa: el plugin habla con la
+# API REST de Discord por HTTP, asi que el JAR no crece.
+#
+# El token NUNCA se escribe en el log. Si lo dejas puesto y
+# alguna vez lo compartes por error, cambialo desde el portal
+# de Discord (Developer Portal > tu bot > Reset Token).
+# =============================================================
+
+# Activa o desactiva todo el envio.
+enabled: false
+
+# -------------------------------------------------------------
+# 1. EL BOT
+# -------------------------------------------------------------
+# Token del bot que envia los avisos.
+#
+# Como obtenerlo:
+#   1. Abre https://discord.com/developers/applications
+#   2. "New Application" > ponle nombre > Create
+#   3. Left "Bot" > "Reset Token" > copiala (solo se ve una vez)
+#   4. Abajo en "Privileged Gateway Intents" no hace falta tocar nada,
+#      este plugin no se conecta al gateway, solo usa la API.
+#   5. En "OAuth2 > URL Generator": marca "bot" y "Send Messages",
+#      copia el link de arriba, abreslo y aceptas.
+#      (En un servidor ya puede que estes en la lista de apps autorizadas)
+#
+# El bot tiene que estar dentro del servidor de Discord y ver el canal.
+token: ''
+
+# Si vas a usar tickets, el bot necesita ademas leer el historial de
+# los canales, poder crearlos y archivarlos, e incrustar enlaces. En
+# "OAuth2 > URL Generator" hay que marcar "bot", "Send Messages",
+# "Read Message History", "Manage Channels" y "Embed Links". Con solo
+# "Send Messages" los avisos funcionan pero los tickets no.
+
+# -------------------------------------------------------------
+# 2. EL CANAL
+# -------------------------------------------------------------
+# ID del canal donde llegan los reportes.
+#
+# Como obtenerlo: activa "Developer Mode" en Ajustes de usuario
+# (Ajustes > Avanzado > Modo desarrollador), luego clic derecho
+# sobre el canal > "Copiar ID de canal".
+# Ojo: es el ID del canal de TEXTO, no el del servidor.
+channel-id: ''
+
+# -------------------------------------------------------------
+# AVENTOS
+# -------------------------------------------------------------
+# Que cambios se avisan al canal. Si no te interesa alguno,
+# ponlo en false y no se envio.
+notify-on:
+  # Un jugador crea un reporte. Es el aviso principal.
+  created: true
+  # Un miembro del staff toma un reporte.
+  taken: true
+  # Un reporte se cierra.
+  closed: true
+  # Un reporte cerrado se reabre.
+  reopened: false
+  # El reportado apela un reporte.
+  appeal: true
+  # El staff ejecuta kick, warn o ban desde el reporte.
+  moderation: true
+  # El staff marca el reporte como falso.
+  false-report: true
+
+# -------------------------------------------------------------
+# EL SERVIDOR DE DISCORD
+# -------------------------------------------------------------
+# ID del servidor donde se crean los canales de los tickets.
+#
+# Como obtenerlo: activa "Developer Mode" en Ajustes de usuario
+# (Ajustes > Avanzado > Modo desarrollador), clic derecho sobre el
+# nombre del servidor > "Copiar ID de servidor".
+#
+# Opcional: si lo dejas vacio y el bot solo esta en un servidor, el
+# plugin busca solo cual es y lo dice por consola. Si el bot esta en
+# varios, cogeria el primero, asi que en ese caso ponlo a mano.
+guild-id: ''
+
+# -------------------------------------------------------------
+# TICKETS: UN CANAL POR REPORTE
+# -------------------------------------------------------------
+# Cuando un member del staff toma un reporte dentro del juego, se
+# crea automaticamente un canal en la categoria de abajo con el
+# chat de ese reporte. El chat va en los dos sentidos:
+#
+#   - lo que escribes en el chat de.Dialogo del reporte aparece en
+#     el canal de Discord;
+#   - lo que se escribe en el canal aparece en el chat del dialogo
+#     del reporte, en unos segundos.
+#
+# No hace falta ningun servicio aparte ni abrir puertos: el bot lee
+# el historial del canal con la API de Discord cada poll-seconds.
+# A cambio, hay unos segundos de retardo y no se ven los "esta
+# escribiendo".
+#
+# PERMISOS QUE NECESITA EL BOT (rol del bot en Discord):
+#   - Ver el canal y Enviar mensajes
+#   - Leer el historial del canal        (para traer los mensajes)
+#   - Gestionar canales                  (para crear y archivar)
+#   - Incrustar enlaces                  (para los embeds)
+# En el Developer Portal, OAuth2 > URL Generator, los permisos van
+# como "bot" mas los de la lista de arriba.
+#
+# OJO: enabled, category-id y todo lo demas van DENTRO de "ticket:".
+# Si se quedan sueltos arriba del todo, el plugin no los ve.
+ticket:
+  # Activa la creacion de canales al tomar un reporte.
+  enabled: false
+
+  # Categoria donde se crean los canales. Con el modo desarrollador
+  # activo, clic derecho sobre la categoria > "Copiar ID de categoria".
+  category-id: ''
+
+  # Rol de Discord al que se le da permiso de escritura y de ver el
+  # canal nuevo. Es lo que deja los reportes en privado para el
+  # staff. Si lo dejas vacio, el canal hereda los permisos que tenga
+  # la categoria, que suele ser abierto a todo el servidor.
+  # Como obtenerlo: Modo desarrollador > clic derecho en el rol >
+  # Copiar ID.
+  staff-role-id: ''
+
+  # Nombre del canal. Discord solo admite minusculas, numeros y
+  # guiones, asi que el motivo se limpia solo. Texto admitting:
+  #   {id} {target} {reason} {reporter} {staff}
+  channel-name: 'reporte-{id}'
+
+  # Que pasa con el canal al cerrar el reporte:
+  #   archive = lo archiva (recomendado: el chat se conserva y el
+  #             canal se desarchiva solo si el reporte se reabre)
+  #   delete  = lo borra, con todo el chat dentro
+  #   none    = no se toca el canal
+  close-action: archive
+
+  # Cada cuantos segundos se lee el canal para traer los mensajes
+  # nuevos al juego. Menos de 2 segundos no aporta nada y Discord
+  # empieza a devolver 429 por tantos.
+  poll-seconds: 3
+
+  # Maximo de mensajes que se traen en cada lectura. Discord no deja
+  # pedir mas de 100 de golpe.
+  max-messages-per-poll: 50
+
+  # Mandar al canal lo que se escribe en el chat del juego.
+  sync-to-discord: true
+
+  # Traer al chat del juego lo que se escribe en el canal.
+  sync-to-game: true
+
+  # Al reabrir un reporte, desarchivar el canal para poder seguir.
+  unarchive-on-reopen: true
+
+  # Ignora los mensajes de otros bots al leer el canal.
+  ignore-bots: true
+
+  # Si un mensaje lleva imagen o archivo, pone su enlace en el chat
+  # del juego para poder abrirlo.
+  show-attachments: true
+
+# -------------------------------------------------------------
+# AVISOS
+# -------------------------------------------------------------
+# Rol al que se menciona cuando llega un reporte nuevo.
+# Dejalo vacio para no mencionar a nadie.
+# Como obtenerlo: Modo desarrollador > clic derecho en el rol > Copiar ID.
+ping-role-id: ''
+
+# Poner @everyone con el reporte nuevo. Desactivalo si hay
+# mucho trafico, es muy ruidoso.
+ping-here: false
+
+# -------------------------------------------------------------
+# COMO SE VE EL EMBED
+# -------------------------------------------------------------
+# Nombre y avatar que usa el bot en el canal.
+username: 'EasyPlayerReport'
+# Avatar del embed. Se puede poner la URL de una imagen o
+# dejarlo vacio para usar el que tenga el bot.
+# Avatar con el que aparece el bot en el canal. Pon aqui la URL de una
+# imagen, o dejalo vacio ('') para que use el que tenga el bot.
+avatar-url: ''
+
+# Color del embed. Formato #RRGGBB.
+color: '#38bdf8'
+
+# Muestra las coordenadas de donde se creo el reporte.
+include-coordinates: true
+
+# Incluye el texto que escribio el jugador en el reporte.
+include-description: true
+
+# Recorta el texto a este numero de caracteres. Discord no admite
+# mas de 4096 en la descripcion de un embed, asi que el maximo util
+# es 4000. Ponlo en 0 para no enviar la descripcion nunca.
+max-description-length: 900
+
+# -------------------------------------------------------------
+# RED
+# -------------------------------------------------------------
+# Tiempo maximo de espera de Discord. Si no responde en este
+# tiempo se da por fallido el aviso.
+timeout-seconds: 10
+
+# Reintentos si falla el envio. Cada reintento espera 2 segundos.
+retry-attempts: 2
+
+# Escribe los errores en la consola. Activalo mientras lo pruebas
+# para ver por que no llega, y apagalo cuando funcione.
+log-errors: true
+
+# Prueba la conexion al recargar la config.
+# Envia un mensaje de prueba al canal para comprobar que el
+# token y el ID del canal son correctos.
+test-on-reload: false

@@ -1,0 +1,20 @@
+# Git normaliza los finales de linea para que el repositorio no cambie entero
+# segun desde donde se clone, y para que dos personas no Vean cambios fantasma.
+
+* text=auto eol=lf
+
+# El .bat solo funciona en Windows y necesita CRLF de verdad.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+*.java text eol=lf
+*.xml text eol=lf
+*.yml text eol=lf
+*.md text eol=lf
+*.pro text eol=lf
+LICENSE text eol=lf
+
+# El JAR que se entrega es binario, aunque normalmente no se versiona.
+*.jar binary
+*.png binary
+*.ogg binary
